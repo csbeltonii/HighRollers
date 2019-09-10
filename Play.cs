@@ -2,7 +2,7 @@
 //  High Rollers
 //
 //  A project given in my Intro to C++ Class in 2011
-//  that essential emulates Yahtzee.
+//  that essentially emulates Yahtzee.
 /******************************************************************/
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ class Play
     {
         Hand player = new Hand("Craig");
         Hand computer = new Hand("House");
-
+        
         // Get and display player's hand
         player.RollHand();
         player.ShowHand();
