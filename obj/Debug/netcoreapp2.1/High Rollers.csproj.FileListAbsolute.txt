@@ -1,0 +1,11 @@
+C:\Users\tehbl\OneDrive\C#\High Rollers\bin\Debug\netcoreapp2.1\High Rollers.deps.json
+C:\Users\tehbl\OneDrive\C#\High Rollers\bin\Debug\netcoreapp2.1\High Rollers.runtimeconfig.json
+C:\Users\tehbl\OneDrive\C#\High Rollers\bin\Debug\netcoreapp2.1\High Rollers.runtimeconfig.dev.json
+C:\Users\tehbl\OneDrive\C#\High Rollers\bin\Debug\netcoreapp2.1\High Rollers.dll
+C:\Users\tehbl\OneDrive\C#\High Rollers\bin\Debug\netcoreapp2.1\High Rollers.pdb
+C:\Users\tehbl\OneDrive\C#\High Rollers\obj\Debug\netcoreapp2.1\High Rollers.csprojAssemblyReference.cache
+C:\Users\tehbl\OneDrive\C#\High Rollers\obj\Debug\netcoreapp2.1\High Rollers.csproj.CoreCompileInputs.cache
+C:\Users\tehbl\OneDrive\C#\High Rollers\obj\Debug\netcoreapp2.1\High Rollers.AssemblyInfoInputs.cache
+C:\Users\tehbl\OneDrive\C#\High Rollers\obj\Debug\netcoreapp2.1\High Rollers.AssemblyInfo.cs
+C:\Users\tehbl\OneDrive\C#\High Rollers\obj\Debug\netcoreapp2.1\High Rollers.dll
+C:\Users\tehbl\OneDrive\C#\High Rollers\obj\Debug\netcoreapp2.1\High Rollers.pdb
