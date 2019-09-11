@@ -15,27 +15,47 @@ class Play
     {
         Hand player = new Hand("Craig");
         Hand computer = new Hand("House");
+        bool contPlay = true;
 
-        // Get and display player's hand
-        player.RollHand();
-        player.ShowHand();
+        while (contPlay)
+        {
+            // Get and display player's hand
+            player.RollHand();
+            player.ShowHand();
 
-        // Get and display computer's hand
-        computer.RollHand();
-        computer.ShowHand();
+            // Get and display computer's hand
+            computer.RollHand();
+            computer.ShowHand();
 
-        // Calculate scores for each player
-        player.Score = GetScore(player);
-        computer.Score = GetScore(computer);
+            // Calculate scores for each player
+            player.Score = GetScore(player);
+            computer.Score = GetScore(computer);
 
-        // Determine winner
-        DetermineWinner(player, computer);
+            // Determine winner
+            DetermineWinner(player, computer);
+
+            char c;
+
+            try
+            {
+                Console.Write("Play again? (Y/N) ");
+                c = Console.ReadLine().ToCharArray()[0];
+            }
+            catch (NullReferenceException nre)
+            {
+                c = 'N';
+            }
+
+            if (c != 'Y')
+                contPlay = false;
+        }
+        
     }
 
     static int GetScore(Hand player)
     {
         Die[] hand = player.GetHand();
-        int[] counts = {0, 0, 0, 0, 0, 0};
+        int[] counts = {0, 0, 0, 0, 0};
         int score = 0;
 
         foreach (Die d in hand)
@@ -81,12 +101,12 @@ class Play
                 unique++;
         }
 
-        if (unique == 6)
+        if (unique == 5)
         {
             Console.WriteLine("Full Straight!");
             return 40; // Full Straight
         }
-        else if (unique == 5)
+        else if (unique == 4)
         {
             Console.WriteLine("Small Straight!");
             return 30; // Small Straight
