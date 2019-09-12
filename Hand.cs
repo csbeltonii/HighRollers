@@ -11,7 +11,7 @@ namespace High_Rollers
 
         public string PlayerName { get; set; }
         private int score;
-        private readonly Die[] _hand = new Die[4];
+        private readonly Die[] _hand = new Die[5];
         public int Score { get; set; }
 
         #endregion

@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Linq;
 using High_Rollers;
 
 class Play
@@ -54,77 +55,99 @@ class Play
 
     static int GetScore(Hand player)
     {
-        Die[] hand = player.GetHand();
-        int[] counts = {0, 0, 0, 0, 0};
+        Die[] dies = player.GetHand();
+        int[] hand = new int[5];
         int score = 0;
+        int i = 0;
 
-        foreach (Die d in hand)
+        foreach (Die d in dies)
         {
-            int index = d.GetResult();
-
-            counts[index-1]++;
+            hand[i++] = d.GetResult();
         }
 
-        score = CheckYahtzee(counts);
+        score = CheckYahtzee(hand);
 
         if (score == 0)
-            score = CheckStraight(counts);
-
+            score = CheckFullStraight(hand);
         if (score == 0)
-            score = AddRolls(counts);
+            score = CheckSmallStraight(hand);
+        if (score == 0)
+            score = AddRolls(hand);
 
         Console.WriteLine("{0}'s score is {1}", player.PlayerName, score);
 
         return score;
     }
 
-    static int CheckYahtzee(int[] faces)
+    static int CheckYahtzee(int[] hand)
     {
-        for (int i = 0; i < faces.Length; i++)
-            if (faces[i] == 5)
+        int ct = 0;
+        int ck = hand.Aggregate(
+            hand[0],
+            (acc, x) =>
             {
-                Console.WriteLine("Yahtzee!");
-                return 50;
-            }
-                
+                if (acc == x)
+                    ct++;
+                return x;
+            });
+
+        if (ct == 5)
+            return 50;
 
         return 0;
     }
 
-    static int CheckStraight(int[] faces)
+    static int CheckFullStraight(int[] hand)
     {
-        int unique = 0;
+        Array.Sort(hand);
 
-        for (int i = 0; i < faces.Length; i++)
-        {
-            if (faces[i] == 1)
-                unique++;
-        }
+        int num = hand.Aggregate(
+            hand[0] - 1,
+            (acc, x) =>
+            {
+                if (x == acc + 1)
+                    return x;
+                return 0;
+            });
 
-        if (unique == 5)
-        {
-            Console.WriteLine("Full Straight!");
-            return 40; // Full Straight
-        }
-        else if (unique == 4)
-        {
-            Console.WriteLine("Small Straight!");
-            return 30; // Small Straight
-        }
-            
+        if (num == 6 || num == 5)
+            return 40;
 
         return 0;
     }
 
-    static int AddRolls(int[] faces)
+    static int CheckSmallStraight(int[] hand)
     {
-        int sum = 0;
-        int j = 1;
+        Array.Sort(hand);
+        int matches = 1;
+        HashSet<int> nums = new HashSet<int>();
 
-        for (int i = 0; i < faces.Length; i++, j++)
+        foreach (int i in hand)
         {
-            sum += faces[i] * j;
+            if (!nums.Contains(i))
+                nums.Add(i);
+            else
+                matches--;
         }
+
+        int ct = nums.Aggregate(
+            0,
+            (acc, x) =>
+            {
+                if (x == acc + 1)
+                    return x;
+                return 0;
+            });
+
+        if ((ct == 6 || ct == 5 || ct == 4) && (matches ==0))
+            return 30;
+
+        return 0;
+    }
+
+    static int AddRolls(int[] hand)
+    {
+        int sum = hand.Sum();
 
         return sum;
     }
